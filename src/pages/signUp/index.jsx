@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useForm } from 'react-hook-form'; //gerencia formulario
 import { yupResolver } from '@hookform/resolvers/yup'; //validador para Yup
 import * as Yup from 'yup'; //valida os campos e seu tipos
 
 import InputStyled from '../../components/atoms/inputStyled';
-import { Container, Content, CardLogo, Form, TextButton } from './styles';
-import { Link } from 'react-router-dom';
 import ButtonStyled from '../../components/atoms/buttonStyled';
+import { UserContext } from '../../contexts/userContext';
+
+import { Container, Content, CardLogo, Form, TextButton } from './styles';
 
 function SignUp() {
 
-  // const { handleSignIn } = useContext(UserContext);
+  const { handleSignUp } = useContext(UserContext);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('O nome é obrigatório'),
@@ -27,8 +29,8 @@ function SignUp() {
   const handleGetValuesSignIn = () => {
     if (Object.keys(errors).length > 0) return;
     const values = getValues();
-    console.log('values', values);
-    // handleSignIn(values)
+
+    handleSignUp(values);
   }
 
   return (

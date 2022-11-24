@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { MdAccountCircle, MdShoppingBag } from "react-icons/md";
+import { UserContext } from '../../../contexts/userContext';
 import { Container, Content, Header, TextTitle } from './styles';
 
 function ContainerAndHeaderTemplate({ content }) {
+  const { userCreated } = useContext(UserContext);
+
   return (
     <Container>
       <Header>
@@ -14,12 +17,12 @@ function ContainerAndHeaderTemplate({ content }) {
 
         <div className='divStyled'>
           <span className='divStyled'>
-            <MdAccountCircle className='svgStyled'/>
-            <p>Fulano | Sair</p>
+            <MdAccountCircle className='svgStyled' />
+            <p>{userCreated?.data?.name} | Sair</p>
           </span>
 
           <span className='divStyled'>
-            <MdShoppingBag className='svgStyled'/>
+            <MdShoppingBag className='svgStyled' />
             <p>Sacola</p>
           </span>
         </div>
