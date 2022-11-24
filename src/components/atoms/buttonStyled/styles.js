@@ -10,7 +10,7 @@ export const Button = styled.button`
 
     color: var(--white);
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: ${({ size }) => size ? size : '1.25rem'};
     line-height: 1.43rem;
 
     display: flex;
