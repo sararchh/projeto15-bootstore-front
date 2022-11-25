@@ -14,7 +14,6 @@ function Wallet() {
   const navigate = useNavigate();
 
   const { productsCart, setProductsCart } = useContext(CartContext);
-  console.log('productsCart', productsCart);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -48,13 +47,13 @@ function Wallet() {
                   <img src={i.image} alt="Imagem do produto" />
                   <div>
                     <p className='title'>{i.name}</p>
-                    <p>quant: 1</p>
+                    <p>quant: {i.qtd}</p>
                     <p>R${i.price.toFixed(2)}</p>
                   </div>
                 </div>
 
                 <div className='divStyled'>
-                  <p className='title'>R${i.price.toFixed(2)}</p>
+                  <p className='title'>R${i.subtotal.toFixed(2)}</p>
                   <button onClick={() => handleRemoveItemsCart(i.id)}>
                     <MdClose />
                   </button>
