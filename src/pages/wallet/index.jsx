@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ContainerAndHeaderTemplate from '../../components/mainTemplate/containerAndHeader';
@@ -14,6 +14,7 @@ function Wallet() {
   const navigate = useNavigate();
 
   const { productsCart, setProductsCart } = useContext(CartContext);
+  const [totalCart, setTotalCart] = useState(0);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -23,10 +24,25 @@ function Wallet() {
     }
   }, []);
 
+  useEffect(() => {
+    handleSumTotalCart();
+  }, []);
+
   const handleRemoveItemsCart = (idItem) => {
     const removeItem = productsCart.filter((i) => i.id !== idItem);
     setProductsCart(removeItem);
   }
+
+  const handleSumTotalCart = () => {
+    let total = 0;
+
+    total = productsCart?.reduce((sum, item) => {
+      return sum + Number(item.subtotal);
+    }, 0);
+
+    setTotalCart(total);
+  }
+
   return (
     <ContainerAndHeaderTemplate content={
       <>
@@ -53,7 +69,7 @@ function Wallet() {
                 </div>
 
                 <div className='divStyled'>
-                  <p className='title'>R${i.subtotal.toFixed(2)}</p>
+                  <p className='title'>R${i.subtotal.toFixed(2).replace('.',',')}</p>
                   <button onClick={() => handleRemoveItemsCart(i.id)}>
                     <MdClose />
                   </button>
@@ -64,7 +80,7 @@ function Wallet() {
           ))}
 
           <div className='divAlign'>
-            <p>TOTAL: R$ 699,98</p>
+            <p>TOTAL: R$ {totalCart.toFixed(2).replace('.',',')}</p>
           </div>
 
           <ButtonStyled
