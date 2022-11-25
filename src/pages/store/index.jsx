@@ -10,13 +10,21 @@ import CardProduct from '../../components/molecules/cardProduct';
 import { MdOutlineSearch, MdFilterListAlt } from "react-icons/md";
 
 import { SearchSection, ContentSearch, ContentCard } from './styles';
+import { useNavigate } from 'react-router-dom';
 
 function Store() {
+  const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
   const [findProduct, setFindProduct] = useState();
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      navigate('/');
+    }
+
     handleGetProducts();
   }, []);
 

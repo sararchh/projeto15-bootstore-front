@@ -18,7 +18,8 @@ export function CartContextProvider({ children }) {
     <CartContext.Provider
       value={{
         handleAddItemCart,
-        productsCart
+        productsCart, 
+        setProductsCart
       }}>
       {children}
     </CartContext.Provider>

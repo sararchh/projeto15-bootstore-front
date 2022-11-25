@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { MdAccountCircle, MdShoppingBag } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,17 @@ import { Container, Content, Header, TextTitle } from './styles';
 
 function ContainerAndHeaderTemplate({ content }) {
   const navigate = useNavigate();
-  const { userCreated, handleLogoutAccount } = useContext(UserContext);
+
+  const [username, setUsername] = useState();
+
+  const { handleLogoutAccount } = useContext(UserContext);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    setUsername(user);
+
+  }, []);
+
 
   return (
     <Container>
@@ -22,7 +32,7 @@ function ContainerAndHeaderTemplate({ content }) {
             <MdAccountCircle className='svgStyled' />
 
             <button onClick={handleLogoutAccount} >
-              <p>{userCreated?.data?.name} | Sair</p>
+              <p>{username} | Sair</p>
             </button>
           </span>
 

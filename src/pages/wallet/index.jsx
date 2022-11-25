@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ContainerAndHeaderTemplate from '../../components/mainTemplate/containerAndHeader';
 import ButtonStyled from '../../components/atoms/buttonStyled';
+
 import { CartContext } from '../../contexts/cartContext';
 
 import { MdOutlineArrowBackIosNew, MdClose } from "react-icons/md";
@@ -12,9 +13,21 @@ import { ContentReturnPage, ContentInfo, Product } from './styles';
 function Wallet() {
   const navigate = useNavigate();
 
-  const { productsCart } = useContext(CartContext);
-  console.log('productsCart', productsCart)
+  const { productsCart, setProductsCart } = useContext(CartContext);
+  console.log('productsCart', productsCart);
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      navigate('/');
+    }
+  }, []);
+
+  const handleRemoveItemsCart = (idItem) => {
+    const removeItem = productsCart.filter((i) => i.id !== idItem);
+    setProductsCart(removeItem);
+  }
   return (
     <ContainerAndHeaderTemplate content={
       <>
@@ -29,8 +42,8 @@ function Wallet() {
 
         <ContentInfo>
           {Boolean(productsCart.length) && productsCart.map((i) => (
-            <>
-              <Product>
+            <div key={i.id}>
+              <Product >
                 <div className='divStyled'>
                   <img src={i.image} alt="Imagem do produto" />
                   <div>
@@ -42,22 +55,25 @@ function Wallet() {
 
                 <div className='divStyled'>
                   <p className='title'>R${i.price.toFixed(2)}</p>
-                  <button>
+                  <button onClick={() => handleRemoveItemsCart(i.id)}>
                     <MdClose />
                   </button>
                 </div>
               </Product>
               <div className='divHr' />
-            </>
+            </div>
           ))}
 
-          <p>TOTAL: R$ 699,98</p>
-
+          <div className='divAlign'>
+            <p>TOTAL: R$ 699,98</p>
+          </div>
 
           <ButtonStyled
             width='220'
             height='40'
-          >FINALIZAR PEDIDO</ButtonStyled>
+          >FINALIZAR PEDIDO
+          </ButtonStyled>
+
         </ContentInfo>
       </>
     }

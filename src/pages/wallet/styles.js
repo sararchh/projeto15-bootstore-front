@@ -43,6 +43,13 @@ export const ContentInfo = styled.div`
       margin: 6px 0 0 7px ;
     }
   }
+
+  .divAlign {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-bottom: 2rem;
+  }
 `;
 
 export const Product = styled.div`

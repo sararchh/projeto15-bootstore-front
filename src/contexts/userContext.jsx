@@ -26,6 +26,7 @@ export function UserContextProvider({ children }) {
       setToken(data.token);
 
       localStorage.setItem('token', data.token);
+      localStorage.setItem('user', data?.name);
       navigate('/store');
 
     } catch (error) {
@@ -42,6 +43,7 @@ export function UserContextProvider({ children }) {
       setToken(data.token);
 
       localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data?.data?.name));
       navigate('/store');
     } catch (error) {
       toast.error('Usuário não encontrado!')
