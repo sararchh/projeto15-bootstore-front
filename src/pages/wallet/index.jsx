@@ -13,7 +13,7 @@ import { ContentReturnPage, ContentInfo, Product } from './styles';
 function Wallet() {
   const navigate = useNavigate();
 
-  const { productsCart, setProductsCart } = useContext(CartContext);
+  const { productsCart, setProductsCart, handlePostItemsCart } = useContext(CartContext);
   const [totalCart, setTotalCart] = useState(0);
 
   useEffect(() => {
@@ -43,6 +43,7 @@ function Wallet() {
     setTotalCart(total);
   }
 
+
   return (
     <ContainerAndHeaderTemplate content={
       <>
@@ -69,7 +70,7 @@ function Wallet() {
                 </div>
 
                 <div className='divStyled'>
-                  <p className='title'>R${i.subtotal.toFixed(2).replace('.',',')}</p>
+                  <p className='title'>R${i.subtotal.toFixed(2).replace('.', ',')}</p>
                   <button onClick={() => handleRemoveItemsCart(i.id)}>
                     <MdClose />
                   </button>
@@ -80,13 +81,15 @@ function Wallet() {
           ))}
 
           <div className='divAlign'>
-            <p>TOTAL: R$ {totalCart.toFixed(2).replace('.',',')}</p>
+            <p>TOTAL: R$ {totalCart.toFixed(2).replace('.', ',')}</p>
           </div>
 
           <ButtonStyled
             width='220'
             height='40'
-          >FINALIZAR PEDIDO
+            onClick={handlePostItemsCart}
+          >
+            FINALIZAR PEDIDO
           </ButtonStyled>
 
         </ContentInfo>

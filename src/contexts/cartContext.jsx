@@ -30,12 +30,30 @@ export function CartContextProvider({ children }) {
     setProductsCart(updateCart);
   }
 
+  const handlePostItemsCart = async () => {
+    try {
+      if (productsCart.length === 0) {
+        return toast.error('Sacola está vazia, verifique!');
+      }
+
+      const response = await api.post('/productsCart', productsCart);
+    
+      if(response.status === 201) {
+        setProductsCart([]);
+      }
+
+    } catch (error) {
+      toast.error('Erro ao salvar sacola!');
+    }
+  }
+
   return (
     <CartContext.Provider
       value={{
         handleAddItemCart,
         productsCart,
-        setProductsCart
+        setProductsCart,
+        handlePostItemsCart
       }}>
       {children}
     </CartContext.Provider>
