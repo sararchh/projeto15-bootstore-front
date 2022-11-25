@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Store from '../pages/store';
 import SignIn from '../pages/signIn';
 import SignUp from '../pages/signUp';
+import Wallet from '../pages/wallet';
 
 const NotFound = () => {
   return (
@@ -19,6 +20,7 @@ function RoutesApp() {
         <Route path='/' element={<SignIn />} />
         <Route path='/signUp' element={<SignUp />} />
         <Route path='/store' element={<Store />} />
+        <Route path='/wallet' element={<Wallet />} />
 
         <Route path='*' element={<NotFound />} />
       </Routes>

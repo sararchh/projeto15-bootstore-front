@@ -48,13 +48,19 @@ export function UserContextProvider({ children }) {
     }
   }
 
+  const handleLogoutAccount = () => {
+    localStorage.removeItem('token');
+    navigate('/');
+  }
+
   return (
     <UserContext.Provider
       value={{
         userCreated,
         token,
         handleSignUp,
-        handleSignIn
+        handleSignIn,
+        handleLogoutAccount
       }}>
       {children}
     </UserContext.Provider>

@@ -8,15 +8,18 @@ import { UserContextProvider } from './contexts/userContext';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { CartContextProvider } from './contexts/cartContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
     <GlobalStyle />
     <BrowserRouter>
-      <UserContextProvider>
-        <RoutesApp />
-      </UserContextProvider>
+      <CartContextProvider>
+        <UserContextProvider>
+          <RoutesApp />
+        </UserContextProvider>
+      </CartContextProvider>
     </BrowserRouter>
     <ToastContainer />
   </>

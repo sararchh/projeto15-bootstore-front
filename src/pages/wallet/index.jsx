@@ -1,0 +1,68 @@
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import ContainerAndHeaderTemplate from '../../components/mainTemplate/containerAndHeader';
+import ButtonStyled from '../../components/atoms/buttonStyled';
+import { CartContext } from '../../contexts/cartContext';
+
+import { MdOutlineArrowBackIosNew, MdClose } from "react-icons/md";
+
+import { ContentReturnPage, ContentInfo, Product } from './styles';
+
+function Wallet() {
+  const navigate = useNavigate();
+
+  const { productsCart } = useContext(CartContext);
+  console.log('productsCart', productsCart)
+
+  return (
+    <ContainerAndHeaderTemplate content={
+      <>
+        <button
+          onClick={() => navigate(-1)}
+        >
+          <ContentReturnPage>
+            <MdOutlineArrowBackIosNew />
+            <p>Minha Sacola</p>
+          </ContentReturnPage>
+        </button>
+
+        <ContentInfo>
+          {Boolean(productsCart.length) && productsCart.map((i) => (
+            <>
+              <Product>
+                <div className='divStyled'>
+                  <img src={i.image} alt="Imagem do produto" />
+                  <div>
+                    <p className='title'>{i.name}</p>
+                    <p>quant: 1</p>
+                    <p>R${i.price.toFixed(2)}</p>
+                  </div>
+                </div>
+
+                <div className='divStyled'>
+                  <p className='title'>R${i.price.toFixed(2)}</p>
+                  <button>
+                    <MdClose />
+                  </button>
+                </div>
+              </Product>
+              <div className='divHr' />
+            </>
+          ))}
+
+          <p>TOTAL: R$ 699,98</p>
+
+
+          <ButtonStyled
+            width='220'
+            height='40'
+          >FINALIZAR PEDIDO</ButtonStyled>
+        </ContentInfo>
+      </>
+    }
+    />
+  );
+}
+
+export default Wallet;
