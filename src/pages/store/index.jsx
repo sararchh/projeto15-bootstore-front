@@ -71,10 +71,10 @@ function Store() {
             </span>
           </ContentSearch>
 
-          <button className='buttonStyled'>
+          {/* <button className='buttonStyled'>
             <p>Filtrar</p>
             <MdFilterListAlt />
-          </button>
+          </button> */}
         </SearchSection>
 
         <ContentCard>
