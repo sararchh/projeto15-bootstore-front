@@ -26,10 +26,10 @@ function CardProduct({ id, category, description, image, name, price }) {
         <p className='textInfo'>{description}</p>
 
         <div className='divStyled'>
-          <Text> R${price.toFixed(2).replace('.',',')}</Text>
+          <Text> R$ {price.toFixed(2).replace('.',',')}</Text>
           <ButtonStyled
-            width='68'
-            height='16'
+            width='72'
+            height='17'
             size='12px'
             onClick={handleAddItem}
           >

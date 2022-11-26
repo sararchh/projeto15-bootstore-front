@@ -13,7 +13,7 @@ import { ContentReturnPage, ContentInfo, Product } from './styles';
 function Wallet() {
   const navigate = useNavigate();
 
-  const { productsCart, setProductsCart, handlePostItemsCart } = useContext(CartContext);
+  const { productsCart, setProductsCart, handlePostItemsCart, setFormOfPayment } = useContext(CartContext);
   const [totalCart, setTotalCart] = useState(0);
 
   useEffect(() => {
@@ -83,6 +83,15 @@ function Wallet() {
           <div className='divAlign'>
             <p>TOTAL: R$ {totalCart.toFixed(2).replace('.', ',')}</p>
           </div>
+
+          <label id="formPag" >Selecione a forma de pagamento:</label>
+          <select name='pag' id="formPag" onChange={(e) => setFormOfPayment(e.target.value)}>
+            <option value=''>SELECIONE:</option>
+            <option value='pix'>PIX</option>
+            <option value='creditCard'>CARTÃO DE CRÉDITO</option>
+            <option value='debitCard'>CARTÃO DE DÉBITO</option>
+          </select>
+
 
           <ButtonStyled
             width='220'
