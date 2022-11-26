@@ -3,10 +3,12 @@ import { createContext } from "react";
 import api from "../services/api";
 
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 export const CartContext = createContext({});
 
 export function CartContextProvider({ children }) {
+  const navigate = useNavigate();
 
   const [productsCart, setProductsCart] = useState([]);
   const [formOfPayment, setFormOfPayment] = useState("");
@@ -50,6 +52,7 @@ export function CartContextProvider({ children }) {
 
       if (response.status === 201) {
         setProductsCart([]);
+        navigate('/completedOrder');
       }
 
     } catch (error) {

@@ -22,10 +22,12 @@ function Wallet() {
     if (!token) {
       navigate('/');
     }
+     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     handleSumTotalCart();
+     // eslint-disable-next-line
   }, []);
 
   const handleRemoveItemsCart = (idItem) => {
