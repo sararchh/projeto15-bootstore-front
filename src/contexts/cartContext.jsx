@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { createContext } from "react";
 import api from "../services/api";
 
 import { toast } from 'react-toastify';
-import { UserContext } from "./userContext";
 
 export const CartContext = createContext({});
 
@@ -11,7 +10,6 @@ export function CartContextProvider({ children }) {
 
   const [productsCart, setProductsCart] = useState([]);
   const [formOfPayment, setFormOfPayment] = useState("");
-  const { userCreated } = useContext(UserContext);
 
   const handleAddItemCart = (item) => {
     const alreadyExists = productsCart.filter((i) => i.id === item.id)[0];

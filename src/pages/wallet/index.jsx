@@ -6,9 +6,9 @@ import ButtonStyled from '../../components/atoms/buttonStyled';
 
 import { CartContext } from '../../contexts/cartContext';
 
-import { MdOutlineArrowBackIosNew, MdClose } from "react-icons/md";
+import { MdOutlineArrowBackIosNew, MdClose, MdShoppingBasket } from "react-icons/md";
 
-import { ContentReturnPage, ContentInfo, Product } from './styles';
+import { ContentReturnPage, ContentInfo, Product, SelectStyled, ContentEmptyBag } from './styles';
 
 function Wallet() {
   const navigate = useNavigate();
@@ -56,52 +56,62 @@ function Wallet() {
           </ContentReturnPage>
         </button>
 
-        <ContentInfo>
-          {Boolean(productsCart.length) && productsCart.map((i) => (
-            <div key={i.id}>
-              <Product >
-                <div className='divStyled'>
-                  <img src={i.image} alt="Imagem do produto" />
-                  <div>
-                    <p className='title'>{i.name}</p>
-                    <p>quant: {i.qtd}</p>
-                    <p>R${i.price.toFixed(2)}</p>
+        {Boolean(productsCart.length)
+          ?
+          <ContentInfo>
+            {Boolean(productsCart.length) && productsCart.map((i) => (
+              <div key={i.id}>
+                <Product >
+                  <div className='divStyled'>
+                    <img src={i.image} alt="Imagem do produto" />
+                    <div>
+                      <p className='title'>{i.name}</p>
+                      <p>quant: {i.qtd}</p>
+                      <p>R${i.price.toFixed(2)}</p>
+                    </div>
                   </div>
-                </div>
 
-                <div className='divStyled'>
-                  <p className='title'>R${i.subtotal.toFixed(2).replace('.', ',')}</p>
-                  <button onClick={() => handleRemoveItemsCart(i.id)}>
-                    <MdClose />
-                  </button>
-                </div>
-              </Product>
-              <div className='divHr' />
+                  <div className='divStyled'>
+                    <p className='title'>R${i.subtotal.toFixed(2).replace('.', ',')}</p>
+                    <button onClick={() => handleRemoveItemsCart(i.id)}>
+                      <MdClose />
+                    </button>
+                  </div>
+                </Product>
+                <div className='divHr' />
+              </div>
+            ))}
+
+            <div className='divAlign'>
+              <p>TOTAL: R$ {totalCart.toFixed(2).replace('.', ',')}</p>
             </div>
-          ))}
 
-          <div className='divAlign'>
-            <p>TOTAL: R$ {totalCart.toFixed(2).replace('.', ',')}</p>
-          </div>
-
-          <label id="formPag" >Selecione a forma de pagamento:</label>
-          <select name='pag' id="formPag" onChange={(e) => setFormOfPayment(e.target.value)}>
-            <option value=''>SELECIONE:</option>
-            <option value='pix'>PIX</option>
-            <option value='creditCard'>CARTÃO DE CRÉDITO</option>
-            <option value='debitCard'>CARTÃO DE DÉBITO</option>
-          </select>
+            <label id="formPag" >Selecione a forma de pagamento:</label> <br />
+            <SelectStyled name='pag' id="formPag" onChange={(e) => setFormOfPayment(e.target.value)}>
+              <option value=''>SELECIONE:</option>
+              <option value='pix'>PIX</option>
+              <option value='creditCard'>CARTÃO DE CRÉDITO</option>
+              <option value='debitCard'>CARTÃO DE DÉBITO</option>
+            </SelectStyled>
 
 
-          <ButtonStyled
-            width='220'
-            height='40'
-            onClick={handlePostItemsCart}
-          >
-            FINALIZAR PEDIDO
-          </ButtonStyled>
+            <ButtonStyled
+              width='220'
+              height='40'
+              onClick={handlePostItemsCart}
+            >
+              FINALIZAR PEDIDO
+            </ButtonStyled>
 
-        </ContentInfo>
+          </ContentInfo>
+          :
+          <ContentEmptyBag>
+            <p>Sacola está vazia</p>
+            <MdShoppingBasket />
+          </ContentEmptyBag>
+        }
+
+
       </>
     }
     />

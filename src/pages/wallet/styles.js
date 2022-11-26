@@ -42,6 +42,7 @@ export const ContentInfo = styled.div`
       color: var(--red);
       margin: 6px 0 0 7px ;
     }
+
   }
 
   .divAlign {
@@ -76,5 +77,42 @@ export const Product = styled.div`
 
   .title {
     font-size: 1.2rem;
+  }
+`;
+
+export const SelectStyled = styled.select`
+  margin-top: 0.8rem;
+  width: 13.75rem;
+  height: 2rem;
+
+  color: var(--purple);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+
+  option {
+    color: var(--purple);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+  }
+`;
+
+export const ContentEmptyBag = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  p {
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  svg {
+    color: var(--white);
+    width: 5rem;
+    height: 5rem;
   }
 `;
