@@ -20,7 +20,7 @@
 ## 💻 Projeto
 
 
-Este projeto é uma aplicação em ReactJS de um carrinho de compras, projeto BackEnd: https://github.com/sararchh/projeto14-mywallet-back
+Este projeto é uma aplicação em ReactJS de um carrinho de compras, projeto BackEnd: https://github.com/sararchh/projeto15-bootstore-back
 
 Link: https://projeto15-bootstore-front.vercel.app/
 
